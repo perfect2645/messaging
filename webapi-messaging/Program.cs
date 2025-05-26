@@ -1,4 +1,10 @@
+using webapi_messaging.Configurations.Swagger;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.ConfigApiVersion();
+
+
 
 // Add services to the container.
 
