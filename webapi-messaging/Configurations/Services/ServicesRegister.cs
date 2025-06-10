@@ -1,4 +1,8 @@
-﻿using Microsoft.OpenApi.Expressions;
+﻿using Messaging.Interfaces;
+using Messaging.SignalR;
+using Microsoft.OpenApi.Expressions;
+using Util;
+using webapi_messaging.Const;
 
 namespace webapi_messaging.Configurations.Services
 {
@@ -18,8 +22,16 @@ namespace webapi_messaging.Configurations.Services
             services.AddTransient<ISignalRClient, SignalRClient>(sp =>
             {
                 var config = sp.GetRequiredService<IConfiguration>();
-                var serverUrl = config.ReadString
+                var serverUrl = config.ReadString($"{Constants.Websocket}:{Constants.ServerUrl}");
+                if (string.IsNullOrEmpty(serverUrl))
+                {
+                    throw new ArgumentNullException(nameof(serverUrl), "Server URL cannot be null or empty.");
+                }
+
+                return new SignalRClient(serverUrl);
             });
+
+
         }
     }
 }

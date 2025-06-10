@@ -5,7 +5,7 @@ namespace Messaging.Interfaces
     public interface ISignalRClient
     {
         string? ServerUrl { get; set; }
-        HubConnection? Connection { get; }
+        HubConnection? HubConnection { get; }
         void BuildConnection();
         void Connect();
         void Disconnect();
