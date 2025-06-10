@@ -30,8 +30,6 @@ namespace webapi_messaging.Configurations.Services
 
                 return new SignalRClient(serverUrl);
             });
-
-
         }
     }
 }
