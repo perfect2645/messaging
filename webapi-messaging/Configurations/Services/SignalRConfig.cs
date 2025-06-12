@@ -1,19 +1,23 @@
-﻿namespace webapi_messaging.Configurations.Services
+﻿using Messaging.SignalR;
+
+namespace webapi_messaging.Configurations.Services
 {
     public static class SignalRConfig
     {
-        public static void AddSignalR(this IServiceCollection services)
+
+
+        public static void ConfigSignalR(this WebApplication app)
+        {
+            app.MapHub<SignalRHub>("/signalrHub");
+        }
+
+        public static void RegisterSignalR(this IServiceCollection services)
         {
             services.AddSignalR(options =>
             {
                 options.EnableDetailedErrors = true;
                 options.MaximumReceiveMessageSize = 102400; // 100 KB
             });
-        }
-
-        public static void MapSignalR(this WebApplication app)
-        {
-            app.MapHub<SignalRHub>("/signalrHub");
         }
     }
 }

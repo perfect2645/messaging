@@ -1,6 +1,5 @@
 ﻿using Messaging.Interfaces;
 using Messaging.SignalR;
-using Microsoft.OpenApi.Expressions;
 using Util;
 using webapi_messaging.Const;
 
@@ -29,6 +28,20 @@ namespace webapi_messaging.Configurations.Services
                 }
 
                 return new SignalRClient(serverUrl);
+            });
+        }
+
+        public static void AllowCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
             });
         }
     }
