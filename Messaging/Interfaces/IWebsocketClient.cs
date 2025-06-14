@@ -1,4 +1,5 @@
-﻿using System.Net.WebSockets;
+﻿using Messaging.WebSocket;
+using System.Net.WebSockets;
 
 namespace Messaging.Interfaces
 {
@@ -8,7 +9,7 @@ namespace Messaging.Interfaces
         Task SendMessage(string message);
         Task ReceiveMessages();
         string ServerUrl { get; }
-        string Topic { get; set; }
+        string Topic { get; }
         string? UserId { get; set; }
         string? ConnectionId { get; set; }
         bool SslEnabled { get; }
@@ -16,8 +17,8 @@ namespace Messaging.Interfaces
         int ReceiveBufferSize { get; set; }
         int SendBufferSize { get; set; }
 
-        event EventHandler<string> OnError;
-        event EventHandler<string> OnConnected;
-        event EventHandler<string> OnMessageReceived;
+        event EventHandler<WebsocketEventArgs> OnError;
+        event EventHandler<WebsocketEventArgs> OnConnected;
+        event EventHandler<WebsocketEventArgs> OnMessageReceived;
     }
 }

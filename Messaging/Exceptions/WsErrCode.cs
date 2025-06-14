@@ -13,7 +13,9 @@
         Controller = 101,
         Service = 102,
 
-        Connection = 401,
+        Connection = 301,
+        ConnectionHeaderInvalid = 302,
+
         Authentication = 402,
 
         ReceiveMessage = 501,

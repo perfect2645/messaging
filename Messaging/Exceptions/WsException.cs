@@ -22,9 +22,21 @@ namespace Messaging.Exceptions
             : base(message, ex)
         {
             ErrCode = errCode;
+            ConnectionHeaderErrorCheck(message);
             if (ex.InnerException != null)
             {
                 GetInnerException(ex);
+            }
+        }
+
+        /// <summary>
+        /// .net framework connection response header 'keep-alive' issue backoff
+        /// </summary>
+        private void ConnectionHeaderErrorCheck(string message)
+        {
+            if (message != null && message.Contains("The 'Connection' header value 'upgrade, keep-alive' is invalid"))
+            {
+                ErrCode = WsErrCode.ConnectionHeaderInvalid;
             }
         }
 

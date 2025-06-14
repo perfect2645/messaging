@@ -1,28 +1,49 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Messaging.Exceptions;
+using Messaging.Interfaces;
+using Messaging.WebSocket;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Messaging.Config
 {
     public static class Initializer
     {
-        public static void InitWsIoc(this IServiceCollection services)
+        public static void InitWsIoc(this IServiceCollection services, IConfiguration config)
         {
-            services.RegisterKeyedWsClient(Constants.IocClient);
+            //services.RegisterKeyedWsClient(Constants.IocClient);
         }
 
         public static void RegisterKeyedWsClient(this IServiceCollection services,
-            string key)
+            IWsClientConfig config)
         {
-            //services.AddKeyedSingleton<IWsClient>(sp =>
-            //{
-            //    var config = sp.GetRequiredService<IConfiguration>();
-            //    var serverUrl = config.ReadString($"{Constants.Websocket}:{Constants.ServerUrl}");
-            //    if (string.IsNullOrEmpty(serverUrl))
-            //    {
-            //        throw new ArgumentNullException(nameof(serverUrl), "Server URL cannot be null or empty.");
-            //    }
-            //    return new SignalRClient(serverUrl);
-            //}).Keyed<ISignalRClient>(key);
+            try
+            {
+                if (string.IsNullOrEmpty(config.ServerUrl))
+                {
+                    throw new WsException($"RegisterKeyedWsClient [{config.Key}]: ServerUrl is null or empty.", WsErrCode.Config);
+                }
+                if (string.IsNullOrEmpty(config.Topic))
+                {
+                    throw new WsException($"RegisterKeyedWsClient [{config.Key}]: Topic is null or empty.", WsErrCode.Config);
+                }
+
+                var key = config.Topic.ToLower();
+                services.AddKeyedSingleton<IWebsocketClient>(key, (sp, args) =>
+                {
+                    var client = new WebsocketClient() 
+                    { 
+                        ServerUrl = config.ServerUrl,
+                        Topic = key,
+                        EnableLogging = config.EnableLogging,
+                    };
+
+                    return client;
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new WsException(ex, $"RegisterKeyedWsClient:[{config.Topic}] failed", WsErrCode.Register);
+            }
         }
     }
 }
