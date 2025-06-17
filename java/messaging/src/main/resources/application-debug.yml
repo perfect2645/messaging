@@ -1,0 +1,18 @@
+app:
+  kafka:
+    topics:
+      demoTopic: demoTopic
+      demoTopic2: demoTopic2
+    group.id: ${app.kafka.groupId}
+    enabled: true
+    ssl:
+      trust-store: ${app.kafka.ssl.trust-store}
+      trust-store-key: messaging2645
+    bootstrap-servers: messaging.kafka:9093
+
+logging:
+  config: classpath:logback-local.xml
+  level:
+    root: INFO
+    org.springframework: INFO
+    com.perfect2645 : INFO

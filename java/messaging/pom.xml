@@ -8,7 +8,7 @@
         <version>3.5.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.perfect200</groupId>
+    <groupId>com.perfect2645</groupId>
     <artifactId>messaging</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>messaging</name>

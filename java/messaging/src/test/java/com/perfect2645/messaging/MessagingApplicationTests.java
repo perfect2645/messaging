@@ -1,4 +1,4 @@
-package com.perfect200.messaging;
+package com.perfect2645.messaging;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

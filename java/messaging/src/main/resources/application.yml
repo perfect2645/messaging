@@ -1,0 +1,29 @@
+
+server:
+  port: 8080
+
+  spring:
+    application:
+      name: 'messaging'
+    greeting: 'welcome to 2645 messaging java microservice'
+    profiles:
+      active: ${SPRING_ACTIVE_PROFILE:debug}
+logging:
+  config: classpath:logback/logback-spring.xml
+  level:
+    root: INFO
+    org.springframework: INFO
+    com.perfect2645: INFO
+
+springdoc:
+  swagger-ui:
+    query-config-enabled: true
+    use-root-path: true
+    disable-swagger-default-url: true
+  packagesToScan: com.perfect2645.messaging.controller
+  pathsToMatch: '/**'
+
+app:
+  kafka:
+    bootstrap-servers: localhost:9092
+    groupId: ALW-CONSUMER-${APP_UUID}
