@@ -1,6 +1,5 @@
 package com.perfect2645.messaging.websocket.handler;
 
-import com.perfect2645.messaging.websocket.config.NativeWebSocketConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -58,18 +57,21 @@ public class NativeWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        if (!validateCloseStatus(closeStatus)) {
+        var connection = connectionManager.getConnection(session);
 
+        if (!validateCloseStatus(closeStatus)) {
+            logger.warn("afterConnectionClosed:Connection [{}] not closed because of status: [{}], session: [{}]",
+                    connection, closeStatus.getCode(), session.getId());
+            return;
         }
 
+        connectionManager.removeConnection(session);
+        logger.info("Connection: {} closed:[{}], status:{}",
+                session.getId(), connection.connectionId(), closeStatus);
     }
     private boolean validateCloseStatus(CloseStatus closeStatus) {
         try {
-            if (closeStatus == CloseStatus.POLICY_VIOLATION) {
-                return false;
-            }
-
-            return true;
+            return closeStatus != CloseStatus.POLICY_VIOLATION;
         } catch (Exception ex) {
             logger.error("validateCloseStatus:Exception occurred. closeStatus={}", closeStatus, ex);
             return false;
