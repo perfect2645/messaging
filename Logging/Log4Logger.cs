@@ -23,7 +23,7 @@ namespace Logging
         private static void InitLogger()
         {
             XmlConfigurator.Configure();
-            _logger = LogManager.GetLogger(GetLoggerType(null));
+            _logger = LogManager.GetLogger(GetLoggerType(typeof(Log4Logger)));
         }
 
         private static Type GetLoggerType(Type? type)
