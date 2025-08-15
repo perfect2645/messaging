@@ -20,11 +20,11 @@ namespace Messaging.Config
             {
                 if (string.IsNullOrEmpty(config.ServerUrl))
                 {
-                    throw new WsException($"RegisterKeyedWsClient [{config.Key}]: ServerUrl is null or empty.", WsErrCode.Config);
+                    throw new WsException($"RegisterKeyedWsClient [{config.Topic}]: ServerUrl is null or empty.", WsErrCode.Config);
                 }
                 if (string.IsNullOrEmpty(config.Topic))
                 {
-                    throw new WsException($"RegisterKeyedWsClient [{config.Key}]: Topic is null or empty.", WsErrCode.Config);
+                    throw new WsException($"RegisterKeyedWsClient [{config.ServerUrl}]: Topic is null or empty.", WsErrCode.Config);
                 }
 
                 var key = config.Topic.ToLower();
