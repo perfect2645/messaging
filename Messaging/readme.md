@@ -1,3 +1,6 @@
-﻿## SignalR
-- Microsoft.AspNetCore.SignalR.Core
-- Microsoft.AspNetCore.SignalR.Client
+﻿# Messaging
+
+Provides below clients:
+- WebsocketClient
+- HttpClient
+- RabbitMqClient

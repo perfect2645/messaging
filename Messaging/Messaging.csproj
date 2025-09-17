@@ -5,6 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
+  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  <PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageId>Messaging.Client.perfect2645</PackageId>
 	<Version>1.0.0</Version>
 	<Authors>Fawei</Authors>
