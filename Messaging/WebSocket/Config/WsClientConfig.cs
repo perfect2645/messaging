@@ -1,4 +1,4 @@
-﻿namespace Messaging.Config
+﻿namespace Messaging.WebSocket.Config
 {
     public class WsClientConfig : IWsClientConfig
     {

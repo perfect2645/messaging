@@ -1,4 +1,4 @@
-﻿using Messaging.Exceptions;
+﻿using Messaging.WebSocket.Exceptions;
 
 namespace Messaging.WebSocket
 {

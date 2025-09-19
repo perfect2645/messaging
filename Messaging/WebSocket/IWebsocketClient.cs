@@ -1,7 +1,6 @@
-﻿using Messaging.WebSocket;
-using System.Net.WebSockets;
+﻿using System.Net.WebSockets;
 
-namespace Messaging.Interfaces
+namespace Messaging.WebSocket
 {
     public interface IWebsocketClient
     {

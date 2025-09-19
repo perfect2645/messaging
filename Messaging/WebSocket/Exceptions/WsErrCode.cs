@@ -1,4 +1,4 @@
-﻿namespace Messaging.Exceptions
+﻿namespace Messaging.WebSocket.Exceptions
 {
     public enum WsErrCode
     {

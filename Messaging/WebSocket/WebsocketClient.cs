@@ -1,7 +1,6 @@
 ﻿using Logging;
-using Messaging.Config;
-using Messaging.Exceptions;
-using Messaging.Interfaces;
+using Messaging.WebSocket.Config;
+using Messaging.WebSocket.Exceptions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -191,7 +190,7 @@ namespace Messaging.WebSocket
                 {
                     Log4Logger.Logger.Error(wsEx.GetDetailedMessages(), wsEx);
                 }
-                var args = new WebsocketEventArgs(wsEx, "OnWsError", ConnectionId, ServerUrl);
+                var args = new WebsocketEventArgs("OnWsError", ConnectionId, ServerUrl);
                 OnError?.Invoke(this, args);
             }
             catch (Exception ex)

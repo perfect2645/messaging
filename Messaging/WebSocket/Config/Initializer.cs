@@ -1,10 +1,8 @@
-﻿using Messaging.Exceptions;
-using Messaging.Interfaces;
-using Messaging.WebSocket;
+﻿using Messaging.WebSocket.Exceptions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Messaging.Config
+namespace Messaging.WebSocket.Config
 {
     public static class Initializer
     {
