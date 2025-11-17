@@ -10,7 +10,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.Authentication;
 using System.Text;
-using Util;
+using Utils;
 
 namespace Messaging.WebSocket
 {
